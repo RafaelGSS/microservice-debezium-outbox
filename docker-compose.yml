@@ -1,4 +1,4 @@
-version: "3.5"
+version: "3"
 
 services:
   zookeeper:
@@ -49,16 +49,33 @@ services:
     build:
       context: ms-user/
       dockerfile: Dockerfile
+    ports:
+      - 3001:3000
     environment:
       DB_CONNECTION: 'mysql://root:toor@db-ms-user/ms_user'
     depends_on:
       - db-ms-user
 
   db-ms-user:
-    image: mysql:latest
+    image: mysql:8
     restart: always
+    command: --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_DATABASE: 'ms_user'
       MYSQL_ROOT_PASSWORD: 'toor'
+    volumes:
+      - 'db_ms_user_mysql_data:/var/lib/mysql'
+      - ./ms-user/database/:/docker-entrypoint-initdb.d
     ports:
-      - '3306:3306'
+      - 1234:3306
+
+  gateway:
+    build:
+      context: gateway/
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - ms-user
+
+volumes:
+  db_ms_user_mysql_data:
