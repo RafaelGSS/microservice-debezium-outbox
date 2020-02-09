@@ -1,4 +1,4 @@
-CREATE DATABASE ms_user IF NOT EXISTS;
+CREATE DATABASE ms_user;
 
 USE ms_user;
 
