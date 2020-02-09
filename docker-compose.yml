@@ -14,6 +14,7 @@ services:
   kafka:
     image: confluentinc/cp-server:5.4.0
     hostname: kafka
+    restart: always
     container_name: kafka
     depends_on:
       - zookeeper
@@ -43,3 +44,21 @@ services:
     environment:
       KAFKA_BROKERCONNECT: kafka:29092
 
+  ms-user:
+    restart: always
+    build:
+      context: ms-user/
+      dockerfile: Dockerfile
+    environment:
+      DB_CONNECTION: 'mysql://root:toor@db-ms-user/ms_user'
+    depends_on:
+      - db-ms-user
+
+  db-ms-user:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'ms_user'
+      MYSQL_ROOT_PASSWORD: 'toor'
+    ports:
+      - '3306:3306'
