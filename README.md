@@ -1,5 +1,9 @@
 # microservice-debezium-outbox
 
+```sh
+docker-compose up
+```
+
 ## Kafka
 
 - Zookeeper
