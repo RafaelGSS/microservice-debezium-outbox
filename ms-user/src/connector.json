@@ -1,0 +1,17 @@
+{
+  "name": "outbox-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+    "tasks.max": "1",
+    "database.hostname": "db-ms-user",
+    "database.port": "3306",
+    "database.user": "root",
+    "database.password": "toor",
+    "database.dbname": "ms_user",
+    "database.server.name": "db-ms-user",
+    "table.whitelist": "ms_user.outbox",
+    "database.history.kafka.bootstrap.servers": "kafka:9092",
+    "database.history.kafka.topic": "schema-changes.outbox",
+    "tombstones.on.delete": "false"
+  }
+}
