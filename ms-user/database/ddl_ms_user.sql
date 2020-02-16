@@ -8,3 +8,11 @@ CREATE TABLE users (
   email VARCHAR(255) NOT NULL,
   PRIMARY KEY (id)
 );
+
+CREATE TABLE outbox (
+	id INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	type VARCHAR(50) NOT NULL,
+	aggregate_type VARCHAR(50) NOT NULL,
+	aggregate_id INTEGER NOT NULL,
+	payload text NOT NULL
+);
