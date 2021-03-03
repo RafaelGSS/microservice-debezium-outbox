@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "fastify": "^2.12.0",
-    "fastify-reply-from": "^2.0.0",
+    "fastify-reply-from": "^4.0.2",
     "k-fastify-gateway": "^2.8.1"
   }
 }
